@@ -109,6 +109,28 @@ function clearLibraryDisplay() {
 	}
 }
 
+function removeBook(e) {
+	let clickedBook = e.currentTarget.closest(".book");
+	let index = clickedBook.getAttribute("data-book-index");
+
+	books.splice(index, 1);
+
+	updateLibraryDisplay();
+}
+
+function toggleCompleted(e) {
+	let clickedBook = e.currentTarget.closest(".book");
+	let index = clickedBook.getAttribute("data-book-index");
+
+	if (books[index].completed) {
+		books[index].completed = false;
+	} else {
+		books[index].completed = true;
+	}
+
+	updateLibraryDisplay();
+}
+
 function updateLibraryDisplay() {
 	/* <div class="book">
 						<h2>The Hobbit</h2>
@@ -125,7 +147,6 @@ function updateLibraryDisplay() {
 							</button>
 						</div>
 					</div>*/
-
 	clearLibraryDisplay();
 	let count = 0;
 	books.forEach((book) => {
@@ -152,6 +173,7 @@ function updateLibraryDisplay() {
 
 		const completedBtn = document.createElement("button");
 		completedBtn.classList.add("icon-btn", "completed-btn");
+		completedBtn.addEventListener("click", toggleCompleted);
 
 		completedBtn.addEventListener("click", (e) => {});
 
@@ -170,14 +192,7 @@ function updateLibraryDisplay() {
 
 		const removeBtn = document.createElement("button");
 		removeBtn.classList.add("icon-btn", "remove-btn");
-		removeBtn.addEventListener("click", (e) => {
-			let clickedBook = e.currentTarget.closest(".book");
-			let index = clickedBook.getAttribute("data-book-index");
-
-			books.splice(index, 1);
-
-			updateLibraryDisplay();
-		});
+		removeBtn.addEventListener("click", removeBook);
 
 		const removeIcon = document.createElement("img");
 		removeIcon.setAttribute("alt", "trash icon");
