@@ -8,7 +8,58 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<div class="page-container"></div>
+		<div class="page-container">
+			<header>
+				<h1 class="title">The Library</h1>
+				<p class="description">Press the add button to add new books :)</p>
+			</header>
+			<main>
+				<div class="library"></div>
+			</main>
+			<button class="form-btn">+</button>
+			<form class="add-form">
+				<div class="form-content">
+					<h2>ADD NEW BOOK</h2>
+					<label for="title">Title:</label>
+					<input type="text" name="title" id="title" required />
+					<label for="author">Author:</label>
+					<input type="text" name="author" id="author" required />
+					<label for="pages">Pages:</label>
+					<input type="number" min="1" name="pages" id="pages" required />
+					<fieldset>
+						<label for="genre">Choose a genre:</label>
+						<select name="genre" id="genre" class="genre-select">
+							<option value="fiction" style="background-color: #e0e0e0">
+								Fiction
+							</option>
+							<option value="nonfiction" style="background-color: #d38536">
+								Nonfiction
+							</option>
+							<option value="poetry" style="background-color: #ffeddb">
+								Poetry
+							</option>
+							<option value="drama" style="background-color: #ffc0cb">
+								Drama
+							</option>
+							<option value="biography" style="background-color: #99d4d0">
+								Biography
+							</option>
+							<option value="other" style="background-color: #9b8383" selected>
+								Other
+							</option>
+						</select>
+					</fieldset>
+
+					<label for="completed">Have you completed it?</label>
+					<input type="checkbox" name="completed" id="completed" />
+				</div>
+				<div class="form-options">
+					<button type="submit" class="add-btn">Add</button>
+					<button type="button" class="cancel-btn">Cancel</button>
+				</div>
+			</form>
+			<footer>Made by Imagine :)</footer>
+		</div>
 		<!-- SCRIPTS -->
 		<script src="script.js"></script>
 	</body>
