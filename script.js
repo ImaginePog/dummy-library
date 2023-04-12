@@ -165,35 +165,58 @@ function updateLibraryDisplay() {
 	clearLibraryDisplay();
 	let count = 0;
 	books.forEach((book) => {
-		const bookDisplay = document.createElement("div");
-		bookDisplay.classList.add("book");
-		bookDisplay.setAttribute("data-book-index", count++);
+		const bookDisplay = genericCreate(
+			"div",
+			{ name: "class", value: "book" },
+			{ name: "data-book-index", value: `${count++}` },
+			{ name: "style", value: `background-color: ${genreLegend[book.genre]};` }
+		);
 
-		const titleDisplay = document.createElement("h2");
-		titleDisplay.innerText = book.title;
+		const titleDisplay = genericCreate("h2", {
+			name: "text",
+			value: `${book.title}`,
+		});
 
-		const authorDisplay = document.createElement("p");
-		authorDisplay.innerText = `by ${book.author}`;
+		const authorDisplay = genericCreate("p", {
+			name: "text",
+			value: `by ${book.author}`,
+		});
 
-		const pagesDisplay = document.createElement("p");
-		pagesDisplay.innerText = `${book.pages} pages`;
-		const options = document.createElement("div");
-		options.classList.add("options");
+		const pagesDisplay = genericCreate("p", {
+			name: "text",
+			value: `${book.pages} pages`,
+		});
 
-		const completedContainer = document.createElement("div");
-		completedContainer.classList.add("completed-container");
+		const options = genericCreate("div", {
+			name: "class",
+			value: "options",
+		});
 
-		const completed = document.createElement("span");
-		completed.innerText = "Completed:";
+		const completedContainer = genericCreate("div", {
+			name: "class",
+			value: "completed-container",
+		});
 
-		const completedBtn = document.createElement("button");
-		completedBtn.classList.add("icon-btn", "completed-btn");
+		const completed = genericCreate("span", {
+			name: "text",
+			value: "Completed:",
+		});
+
+		const completedBtn = genericCreate(
+			"button",
+			{
+				name: "class",
+				value: "icon-btn",
+			},
+			{ name: "class", value: "completed-btn" }
+		);
+
 		completedBtn.addEventListener("click", toggleCompleted);
 
-		completedBtn.addEventListener("click", (e) => {});
-
-		const completedIcon = document.createElement("img");
-		completedIcon.setAttribute("alt", "completed icon");
+		const completedIcon = genericCreate("img", {
+			name: "alt",
+			value: "completed icon",
+		});
 
 		if (book.completed) {
 			completedIcon.src = "assets/check.svg";
@@ -205,21 +228,31 @@ function updateLibraryDisplay() {
 
 		completedContainer.append(completed, completedBtn);
 
-		const removeBtn = document.createElement("button");
-		removeBtn.classList.add("icon-btn", "remove-btn");
+		const removeBtn = genericCreate(
+			"button",
+			{
+				name: "class",
+				value: "icon-btn",
+			},
+			{ name: "class", value: "remove-btn" }
+		);
+
 		removeBtn.addEventListener("click", removeBook);
 
-		const removeIcon = document.createElement("img");
-		removeIcon.setAttribute("alt", "trash icon");
-		removeIcon.setAttribute("src", "assets/delete.svg");
+		const removeIcon = genericCreate(
+			"img",
+			{
+				name: "src",
+				value: "assets/delete.svg",
+			},
+			{ name: "alt", value: "remove icon" }
+		);
 
 		removeBtn.appendChild(removeIcon);
 
 		options.append(completedContainer, removeBtn);
 
 		bookDisplay.append(titleDisplay, authorDisplay, pagesDisplay, options);
-
-		bookDisplay.style.backgroundColor = genreLegend[book.genre];
 
 		libraryDisplay.appendChild(bookDisplay);
 	});
