@@ -25,6 +25,21 @@ Book.prototype.log = function () {
 	console.log(this.title, this.author, this.pages, this.genre, this.completed);
 };
 
+/* UTILITY */
+
+function genericCreate(elementName, ...attributes) {
+	const genericElement = document.createElement(elementName);
+
+	attributes.forEach((attribute) => {
+		if (attribute.name === "text") genericElement.innerText = attribute.value;
+		else if (attribute.name === "class")
+			genericElement.classList.add(attribute.value);
+		else genericElement.setAttribute(attribute.name, attribute.value);
+	});
+
+	return genericElement;
+}
+
 /* ****************** */
 
 /* DOM ELEMETSE */
