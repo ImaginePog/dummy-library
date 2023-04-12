@@ -1,1 +1,224 @@
-alert("helo");
+/* PREDEFINED CONSTANT */
+
+const genreLegend = {
+	fiction: "#e0e0e0",
+	nonfiction: "#d38536",
+	poetry: "#ffeddb",
+	drama: "#ffc0cb",
+	biography: "#99d4d0",
+	other: "#9b8383",
+};
+
+/* ****************** */
+
+/* BOOK OBJECT */
+
+function Book(title, author, pages, genre, completed) {
+	this.title = title;
+	this.author = author;
+	this.pages = pages;
+	this.genre = genre;
+	this.completed = completed;
+}
+
+Book.prototype.log = function () {
+	console.log(this.title, this.author, this.pages, this.genre, this.completed);
+};
+
+/* ****************** */
+
+/* DOM ELEMETSE */
+
+// FORM STUFF
+const formBtn = document.querySelector(".form-btn");
+
+const addForm = document.querySelector(".add-form");
+const genreSelect = document.querySelector(".genre-select");
+
+const cancelBtn = document.querySelector(".cancel-btn");
+const addBtn = document.querySelector(".add-btn");
+
+// LIBRARY STUFF
+
+const libraryDisplay = document.querySelector(".library");
+
+/* ****************** */
+
+// GLOBALS
+//TEMP
+
+const book1 = new Book("lol", "la", 12, "fiction", false);
+const book2 = new Book("lol", "la", 12, "nonfiction", false);
+
+const book3 = new Book("lol", "la", 12, "biography", false);
+const book4 = new Book("lol", "la", 12, "drama", false);
+const book5 = new Book("lol", "la", 12, "other", false);
+const book6 = new Book("lol", "la", 12, "poetry", false);
+const book7 = new Book("lol", "la", 12, "poetry", false);
+
+const book8 = new Book("lol", "la", 12, "poetry", false);
+
+const book9 = new Book("lol", "la", 12, "drama", false);
+
+const book10 = new Book("lol", "la", 12, "poetry", false);
+
+let books = [
+	book1,
+	book2,
+	book3,
+	book4,
+	book5,
+	book6,
+	book7,
+	book8,
+	book9,
+	book10,
+];
+
+function openForm() {
+	addForm.classList.add("form-display");
+}
+
+function resetForm() {
+	const inputs = addForm.querySelectorAll("input");
+	inputs.forEach((input) => {
+		if (input.type === "number" || input.type === "text") {
+			if (input.value !== "") {
+				input.value = "";
+			}
+		} else if (input.type === "checkbox") {
+			if (input.checked === true) {
+				input.checked = false;
+			}
+		}
+	});
+
+	const select = addForm.querySelector("select");
+
+	select.value = "other";
+	select.style.backgroundColor = genreLegend[select.value];
+}
+
+function closeForm() {
+	resetForm();
+	addForm.classList.remove("form-display");
+}
+function clearLibraryDisplay() {
+	while (libraryDisplay.firstChild) {
+		libraryDisplay.removeChild(libraryDisplay.firstChild);
+	}
+}
+
+function updateLibraryDisplay() {
+	/* <div class="book">
+						<h2>The Hobbit</h2>
+						<p>by Tolkien</p>
+						<p>300 pages</p>
+						<p></p>
+						<div class="options">
+							<span>Completed:</span>
+							<button class="icon-btn mark-btn">
+								<img src="assets/check.svg" alt="mark-icon" />
+							</button>
+							<button class="icon-btn remove-btn">
+								<img src="assets/delete.svg" alt="trash-icon" />
+							</button>
+						</div>
+					</div>*/
+
+	clearLibraryDisplay();
+	let count = 0;
+	books.forEach((book) => {
+		const bookDisplay = document.createElement("div");
+		bookDisplay.classList.add("book");
+		bookDisplay.setAttribute("data-book-index", count++);
+
+		const titleDisplay = document.createElement("h2");
+		titleDisplay.innerText = book.title;
+
+		const authorDisplay = document.createElement("p");
+		authorDisplay.innerText = `by ${book.author}`;
+
+		const pagesDisplay = document.createElement("p");
+		pagesDisplay.innerText = `${book.pages} pages`;
+		const options = document.createElement("div");
+		options.classList.add("options");
+
+		const completedContainer = document.createElement("div");
+		completedContainer.classList.add("completed-container");
+
+		const completed = document.createElement("span");
+		completed.innerText = "Completed:";
+
+		const completedBtn = document.createElement("button");
+		completedBtn.classList.add("icon-btn", "completed-btn");
+
+		completedBtn.addEventListener("click", (e) => {});
+
+		const completedIcon = document.createElement("img");
+		completedIcon.setAttribute("alt", "completed icon");
+
+		if (book.completed) {
+			completedIcon.src = "assets/check.svg";
+		} else {
+			completedIcon.src = "assets/x.svg";
+		}
+
+		completedBtn.appendChild(completedIcon);
+
+		completedContainer.append(completed, completedBtn);
+
+		const removeBtn = document.createElement("button");
+		removeBtn.classList.add("icon-btn", "remove-btn");
+		removeBtn.addEventListener("click", (e) => {
+			let clickedBook = e.currentTarget.closest(".book");
+			let index = clickedBook.getAttribute("data-book-index");
+
+			books.splice(index, 1);
+
+			updateLibraryDisplay();
+		});
+
+		const removeIcon = document.createElement("img");
+		removeIcon.setAttribute("alt", "trash icon");
+		removeIcon.setAttribute("src", "assets/delete.svg");
+
+		removeBtn.appendChild(removeIcon);
+
+		options.append(completedContainer, removeBtn);
+
+		bookDisplay.append(titleDisplay, authorDisplay, pagesDisplay, options);
+
+		bookDisplay.style.backgroundColor = genreLegend[book.genre];
+
+		libraryDisplay.appendChild(bookDisplay);
+	});
+}
+
+formBtn.addEventListener("click", openForm);
+cancelBtn.addEventListener("click", closeForm);
+
+addForm.addEventListener("submit", function (e) {
+	e.preventDefault();
+
+	const newBook = new Book(
+		e.currentTarget.title.value,
+		e.currentTarget.author.value,
+		e.currentTarget.pages.value,
+		e.currentTarget.genre.value,
+		e.currentTarget.completed.checked
+	);
+
+	books.push(newBook);
+
+	updateLibraryDisplay();
+
+	closeForm();
+});
+
+genreSelect.addEventListener("change", (e) => {
+	const currOption = e.currentTarget.value;
+	e.currentTarget.style.backgroundColor = genreLegend[currOption];
+});
+
+updateLibraryDisplay();
