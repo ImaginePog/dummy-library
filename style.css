@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+	--color-form-btn: #3131a8;
+	--color-form: #656d4a;
+	--color-main-text: black;
+
+	--color-main-page: #503116;
+	--color-margins: #120903;
+}
+
 * {
 	padding: 0;
 	margin: 0;
@@ -10,4 +19,183 @@
 	color: var(--color-main-text);
 
 	font-family: "Lato", sans-serif;
+}
+
+button:hover {
+	opacity: 60%;
+}
+
+button:active {
+	opacity: 20%;
+}
+
+header > h1,
+header > p {
+	text-align: center;
+	color: #cbceb6;
+}
+
+header > h1 {
+	font-size: 3rem;
+}
+
+.form-btn {
+	width: 50px;
+	height: 50px;
+	background-color: var(--color-form-btn);
+	color: white;
+
+	font-size: 3rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 50%;
+
+	position: fixed;
+	bottom: 5px;
+	left: 5px;
+}
+
+.add-form {
+	background-color: var(--color-form);
+
+	font-size: 1.3rem;
+	width: 300px;
+	height: 500px;
+
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+
+	border-radius: 24px;
+	overflow: hidden;
+
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+
+	z-index: 2222;
+}
+
+.form-content {
+	padding: 15px 20px;
+}
+
+.add-form h2 {
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.add-form input[type="text"],
+.add-form input[type="number"],
+.add-form select {
+	width: 100%;
+	font-size: 1.2rem;
+	padding: 5px 12px;
+	border-radius: 5px;
+	margin: 8px 0;
+}
+
+.genre-select {
+	background-color: #9b8383;
+}
+
+.form-options {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.form-options > button {
+	width: 100%;
+	font-size: 1.2rem;
+	padding: 6px;
+}
+
+.add-btn {
+	background-color: #6cda6c;
+}
+
+.cancel-btn {
+	background-color: rgb(179, 173, 173);
+}
+
+body {
+	background-color: var(--color-margins);
+}
+
+.page-container {
+	margin: 0 20%;
+	background-color: var(--color-main-page);
+
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+	position: relative;
+}
+
+.library {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-auto-rows: 200px;
+
+	gap: 48px;
+	padding: 50px;
+}
+
+.book {
+	background-color: #99d4d0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 24px 8px 8px;
+
+	border-radius: 6px;
+}
+
+.book > .options {
+	flex: 1;
+	align-self: stretch;
+
+	display: flex;
+
+	align-items: end;
+	justify-content: space-between;
+	gap: 4px;
+}
+
+.options > .completed-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.remove-btn {
+	justify-self: self-end;
+}
+
+.icon-btn {
+	width: 30px;
+	height: 30px;
+	border-radius: 2px;
+	background-color: transparent;
+}
+
+.icon-btn > img {
+	width: 100%;
+	height: 100%;
+}
+
+/* DYNAMIC */
+
+.form-display {
+	display: flex;
 }
