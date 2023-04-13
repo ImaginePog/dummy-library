@@ -63,35 +63,7 @@ const libraryDisplay = document.querySelector(".library");
 /* ****************** */
 
 // GLOBALS
-//TEMP
-
-const book1 = new Book("lol", "la", 12, "fiction", false);
-const book2 = new Book("lol", "la", 12, "nonfiction", false);
-
-const book3 = new Book("lol", "la", 12, "biography", false);
-const book4 = new Book("lol", "la", 12, "drama", false);
-const book5 = new Book("lol", "la", 12, "other", false);
-const book6 = new Book("lol", "la", 12, "poetry", false);
-const book7 = new Book("lol", "la", 12, "poetry", false);
-
-const book8 = new Book("lol", "la", 12, "poetry", false);
-
-const book9 = new Book("lol", "la", 12, "drama", false);
-
-const book10 = new Book("lol", "la", 12, "poetry", false);
-
-let books = [
-	book1,
-	book2,
-	book3,
-	book4,
-	book5,
-	book6,
-	book7,
-	book8,
-	book9,
-	book10,
-];
+let books = [];
 
 function populateLegend() {
 	// <div class="genre">
@@ -229,16 +201,6 @@ function updateLibraryDisplay() {
 			value: "options",
 		});
 
-		const completedContainer = genericCreate("div", {
-			name: "class",
-			value: "completed-container",
-		});
-
-		const completed = genericCreate("span", {
-			name: "text",
-			value: "Completed:",
-		});
-
 		const completedBtn = genericCreate(
 			"button",
 			{
@@ -263,8 +225,6 @@ function updateLibraryDisplay() {
 
 		completedBtn.appendChild(completedIcon);
 
-		completedContainer.append(completed, completedBtn);
-
 		const removeBtn = genericCreate(
 			"button",
 			{
@@ -287,7 +247,7 @@ function updateLibraryDisplay() {
 
 		removeBtn.appendChild(removeIcon);
 
-		options.append(completedContainer, removeBtn);
+		options.append(completedBtn, removeBtn);
 
 		bookDisplay.append(titleDisplay, authorDisplay, pagesDisplay, options);
 
@@ -320,7 +280,5 @@ genreSelect.addEventListener("change", (e) => {
 	const currOption = e.currentTarget.value;
 	e.currentTarget.style.backgroundColor = genreLegend[currOption];
 });
-
-updateLibraryDisplay();
 
 populateLegend();

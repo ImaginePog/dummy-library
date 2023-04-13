@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
-	--color-form-btn: #3131a8;
-	--color-form: #656d4a;
+	--color-ui: #656d4a;
 	--color-main-text: black;
-
+	--color-other-text: #cbceb6;
 	--color-main-page: #503116;
-	--color-margins: #120903;
+	--color-margins: #301808;
 }
 
 * {
@@ -32,7 +31,7 @@ button:active {
 /* LEGEND */
 
 .legend {
-	background-color: var(--color-form);
+	background-color: var(--color-ui);
 	position: fixed;
 	top: 50px;
 	right: 50px;
@@ -68,7 +67,7 @@ button:active {
 header > h1,
 header > p {
 	text-align: center;
-	color: #cbceb6;
+	color: var(--color-other-text);
 }
 
 header > h1 {
@@ -76,13 +75,13 @@ header > h1 {
 }
 
 .form-btn {
-	width: 50px;
-	height: 50px;
-	background-color: var(--color-form-btn);
+	background-color: var(--color-ui);
 	color: white;
 
-	font-size: 3rem;
+	width: 50px;
+	height: 50px;
 
+	font-size: 2.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -95,7 +94,7 @@ header > h1 {
 }
 
 .add-form {
-	background-color: var(--color-form);
+	background-color: var(--color-ui);
 
 	font-size: 1.3rem;
 	width: 300px;
@@ -208,12 +207,6 @@ main {
 	gap: 4px;
 }
 
-.options > .completed-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .remove-btn {
 	justify-self: self-end;
 }
@@ -234,4 +227,14 @@ main {
 
 .form-display {
 	display: flex;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 6px;
+}
+
+footer > .credit {
+	color: var(--color-other-text);
 }
