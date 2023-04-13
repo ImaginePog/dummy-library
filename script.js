@@ -40,7 +40,19 @@ function genericCreate(elementName, ...attributes) {
 	return genericElement;
 }
 
-/* ****************** */
+function capitalizeName(name) {
+	let words = name.split(" ");
+
+	for (let i = 0; i < words.length; ++i) {
+		let firstChar = words[i].charAt(0);
+		firstChar = firstChar.toUpperCase();
+
+		words[i] = firstChar + words[i].slice(1).toLowerCase();
+	}
+
+	let capitalized = words.join(" ");
+	return capitalized;
+}
 
 /* DOM ELEMETSE */
 
@@ -262,8 +274,8 @@ addForm.addEventListener("submit", function (e) {
 	e.preventDefault();
 
 	const newBook = new Book(
-		e.currentTarget.title.value,
-		e.currentTarget.author.value,
+		capitalizeName(e.currentTarget.title.value),
+		capitalizeName(e.currentTarget.author.value),
 		e.currentTarget.pages.value,
 		e.currentTarget.genre.value,
 		e.currentTarget.completed.checked
