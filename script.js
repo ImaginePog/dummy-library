@@ -44,6 +44,9 @@ function genericCreate(elementName, ...attributes) {
 
 /* DOM ELEMETSE */
 
+//LEGEND
+const legend = document.querySelector(".legend");
+
 // FORM STUFF
 const formBtn = document.querySelector(".form-btn");
 
@@ -89,6 +92,37 @@ let books = [
 	book9,
 	book10,
 ];
+
+function populateLegend() {
+	// <div class="genre">
+	// 	<div class="color-container"></div>
+	// 	<p class="label">Fiction</p>
+	// </div>;
+
+	for (genre in genreLegend) {
+		const genreDisplay = genericCreate("div", {
+			name: "class",
+			value: "genre",
+		});
+		const colorContainer = genericCreate(
+			"div",
+			{
+				name: "class",
+				value: "color-container",
+			},
+			{ name: "style", value: `background-color: ${genreLegend[genre]}` }
+		);
+
+		const genreLabel = genericCreate(
+			"p",
+			{ name: "class", value: "label" },
+			{ name: "text", value: `${genre}` }
+		);
+
+		genreDisplay.append(colorContainer, genreLabel);
+		legend.appendChild(genreDisplay);
+	}
+}
 
 function openForm() {
 	addForm.classList.add("form-display");
@@ -147,11 +181,15 @@ function toggleCompleted(e) {
 }
 
 function updateLibraryDisplay() {
-	/* <div class="book">
-						<h2>The Hobbit</h2>
-						<p>by Tolkien</p>
-						<p>300 pages</p>
-						<p></p>
+	clearLibraryDisplay();
+
+	let count = 0;
+	books.forEach((book) => {
+		/* TEMPLATE
+          <div class="book">
+						<h2>Title</h2>
+						<p>by author</p>
+						<p>n pages</p>
 						<div class="options">
 							<span>Completed:</span>
 							<button class="icon-btn mark-btn">
@@ -161,10 +199,9 @@ function updateLibraryDisplay() {
 								<img src="assets/delete.svg" alt="trash-icon" />
 							</button>
 						</div>
-					</div>*/
-	clearLibraryDisplay();
-	let count = 0;
-	books.forEach((book) => {
+					</div>
+    */
+
 		const bookDisplay = genericCreate(
 			"div",
 			{ name: "class", value: "book" },
@@ -285,3 +322,5 @@ genreSelect.addEventListener("change", (e) => {
 });
 
 updateLibraryDisplay();
+
+populateLegend();

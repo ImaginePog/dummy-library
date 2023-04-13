@@ -29,6 +29,42 @@ button:active {
 	opacity: 20%;
 }
 
+/* LEGEND */
+
+.legend {
+	background-color: var(--color-form);
+	position: fixed;
+	top: 50px;
+	right: 50px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+
+	text-align: center;
+	font-size: 1.3rem;
+
+	border-radius: 12px;
+	padding: 24px;
+}
+
+.genre {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.color-container {
+	width: 20px;
+	height: 20px;
+}
+
+.label {
+	text-transform: capitalize;
+}
+
+/**************/
+
 header > h1,
 header > p {
 	text-align: center;
