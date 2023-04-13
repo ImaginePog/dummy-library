@@ -71,6 +71,7 @@ const addBtn = document.querySelector(".add-btn");
 // LIBRARY STUFF
 
 const libraryDisplay = document.querySelector(".library");
+const clearBtn = document.querySelector(".clear-btn");
 
 /* ****************** */
 
@@ -161,6 +162,11 @@ function toggleCompleted(e) {
 		books[index].completed = true;
 	}
 
+	updateLibraryDisplay();
+}
+
+function clearLibrary() {
+	books.length = 0;
 	updateLibraryDisplay();
 }
 
@@ -292,5 +298,7 @@ genreSelect.addEventListener("change", (e) => {
 	const currOption = e.currentTarget.value;
 	e.currentTarget.style.backgroundColor = genreLegend[currOption];
 });
+
+clearBtn.addEventListener("click", clearLibrary);
 
 populateLegend();
