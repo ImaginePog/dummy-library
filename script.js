@@ -11,19 +11,29 @@ const genreLegend = {
 
 /* ****************** */
 
-/* BOOK OBJECT */
+/* BOOK CLASS */
 
-function Book(title, author, pages, genre, completed) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.genre = genre;
-	this.completed = completed;
+class Book {
+	constructor(title, author, pages, genre, completed) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.genre = genre;
+		this.completed = completed;
+	}
+
+	log() {
+		console.log(
+			this.title,
+			this.author,
+			this.pages,
+			this.genre,
+			this.completed
+		);
+	}
 }
 
-Book.prototype.log = function () {
-	console.log(this.title, this.author, this.pages, this.genre, this.completed);
-};
+/* ****************** */
 
 /* UTILITY */
 
